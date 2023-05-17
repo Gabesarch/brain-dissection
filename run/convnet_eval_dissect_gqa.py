@@ -67,7 +67,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 from dissect.netdissect import nethook, imgviz, show, segmenter, renormalize, upsample, tally, pbar, runningstats
 from dissect.netdissect import setting
-from models.convnet_eval_baudissect_nsd import Eval
+from run.convnet_eval_baudissect_nsd import Eval
 
 torch.backends.cudnn.benchmark = True
 torch.set_grad_enabled(False) # not training anything!

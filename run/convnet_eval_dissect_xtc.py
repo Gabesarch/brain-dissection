@@ -41,13 +41,13 @@ import ipdb
 st = ipdb.set_trace
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+sys.path.append('dissect')
 from dissect.netdissect import nethook, imgviz, show, segmenter, renormalize, upsample, tally, pbar, runningstats
 from dissect.experiment import setting
 
-
-from models.convnet_eval_baudissect_nsd import Eval
+from run.convnet_eval_dissect_nsd import Eval
 '''
-NOTE: Eval_XTC inherits from models.convnet_eval_baudissect_nsd
+NOTE: Eval_XTC inherits from run.convnet_eval_baudissect_nsd
 '''
 
 torch.backends.cudnn.benchmark = True

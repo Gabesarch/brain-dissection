@@ -554,7 +554,7 @@ def dimensionality_reduction_feats(
         if not os.path.isfile(pca_test_file_path) or override_existing_pca:
             print("saving ", pca_test_file_path)
             print(f"Size of saved test features: {X_test.shape}")
-            np.save(pca_test_file_path, X_test
+            np.save(pca_test_file_path, X_test)
         print('done.')
 
     elif method=='pca':

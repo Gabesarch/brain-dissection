@@ -48,7 +48,7 @@ parser.add_argument("--attention_threshold", type=float, default=None, help="""W
     obtained by thresholding the self-attention maps to keep xx% of the mass.""")
 parser.add_argument("--images_path", type=str, default="./data/images", help="Path for saving checkpoints")
 
-parser.add_argument("--activation_threshold", type=float, default=0.97, help="""We get IOUs
+parser.add_argument("--activation_threshold", type=float, default=0.99, help="""We get IOUs
     by thresholding the activation maps""")
 
 # parser.add_argument('--patch_size', default=16, type=int, help="patch size for vit in pixels")
@@ -59,7 +59,7 @@ parser.add_argument("--run_validation", action="store_true", default=False, help
 parser.add_argument("--save_freq", type=int, default=500, help="how often to save a checkpoint")
 
 parser.add_argument("--image_size", type=int, default=224, help="")
-parser.add_argument("--image_size_eval", type=int, default=256, help="")
+parser.add_argument("--image_size_eval", type=int, default=56, help="")
 
 parser.add_argument('--readout_sparse_weight_spatial', default=0.0, type=float)
 parser.add_argument('--readout_sparse_weight_feature', default=0.0, type=float)
@@ -87,7 +87,7 @@ parser.add_argument("--default_args", type=str, default=None, help="set default 
 
 parser.add_argument("--subjects", type=int, nargs='+', default=[1,2,3,4,5,6,7,8], help="which subjects to use?")
 
-parser.add_argument("--topk", type=int, default=100, help="")
+parser.add_argument("--topk", type=int, default=10, help="")
 
 parser.add_argument("--subsample_images", type=int, default=None, help="subsample every X images")
 

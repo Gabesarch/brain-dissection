@@ -90,44 +90,66 @@ pip install -r requirements.txt
 Please download and process the Natural Scenes Dataset to get the fMRI data and NSD images: [Link](https://naturalscenesdataset.org/)
 
 ## PLACES365
-For evaluation of the Places365 dataset, please download the Places365 dataset : [Link](http://places2.csail.mit.edu/)
-Put the dataset in ./datasets
+Our dataloaders will download the places dataset for you when first running the evaluation.
+
+Alternatively, you can download the Places365 dataset : [Link](http://places2.csail.mit.edu/)
+
+Put the dataset in `./datasets`
 
 ## GQA dataset
 For evaluation of the GQA dataset, please download the GQA dataset : [Link](https://cs.stanford.edu/people/dorarad/gqa/download.html)
-Put the dataset in ./datasets
+
+Put the dataset in `./datasets`
 
 # Response-Optimized Training
 
-## Running the task
-The Tidy Task involves detecting and moving out of place objects to plausible places within the scene without any instructions. You can see `task_base/messup.py` for our data generation code to move objects out of place. See `task_base/example.py` for an example script of running the task with random actions. To run the tidy task, the tidy task dataset must be downloaded (see <a href="#dataset"> Dataset</a>)
-
-## Dataset
-Our tidy task dataset contains `8000` training scenes, `200` validation scenes, and `100` testing scenes with five objects in each scene moved out of place. To run the tidy task with the generated scenes, download the scene metadata from [here](https://drive.google.com/file/d/1KFUxxL8KU4H8dxBpjhp1SGAf3qnTtEBM/view?usp=sharing) and place the extracted contents inside of the `data` folder.  
-
+## Training on NSD
+Train a network to predict the responses of NSD. You can see `nets/convnet_alt.py` for the model file and `models/convnet_fit_nsd.py` for the model training code. To train on a model on the NSD data using default hyperparameters (see `arguments.py`), run the following (for example ROI RSC):
+```
+python main.py \
+    --rois RSC \
+    --mode convnet_nsd_response_optimized \
+    --run_validation \
+    --coco_images_path REPLACE_WITH_NSD_IMAGE_DIRECTORY \
+    --subjects_repeat_path REPLACE_WITH_NSD_SUBJECT_DATA_DIRECTORY \
+    --brain_data_dir REPLACE_WITH_NSD_BRAIN_DATA_DIRECTORY \
+    --roi_dir REPLACE_WITH_NSD_ROI_DIRECTORY \
+    --noise_ceiling_dir REPLACE_WITH_NSD_NOISE_CEILING_DIRECTORY \
+    --set_name train_subjs12345678_RSC
+```
 
 # Model Dissection
-This section details how to train the Out of Place Detector.
+This section details run the network dissection on the response-optimized network.
 
-We first train [SOLQ](https://github.com/megvii-research/SOLQ) with two prediction heads (one for category, one for out of place). See `models/aithor_solq.py` and `models/aithor_solq_base.py` for code details, and `arguments.py` for training argument details. 
+## Evaluating on Places365
+To evaluate on Places365 for depth, surface normals, shading, guassian curvature, and category, run the following (for example on Subject 1 for model trained from the section above):
+```
+python main.py \
+    --mode convnet_xtc_eval_baudissect \
+    --data_directory REPLACE_WITH_PLACES365_IMAGE_DIRECTORY \
+    --load_model \
+    --load_model_path "./checkpoints/train_subjs12345678_RSC/model-best.pth" \
+    --eval_subject 1 \
+    --analyze_depth \
+    --save_dissection_samples \
+    --load_dissection_samples \
+    --filter_images_by_responses \
+    --batch_size 1 \
+    --set_name "EVAL_places365_subject1_RSC" 
+```
 
-```
-python main.py --mode solq --S 5 --data_batch_size 5 --lr_drop 7 --run_val --load_val_agent --val_load_dir ./data/val_data/aithor_tidee_oop --plot_boxes --plot_masks --randomize_scene_lighting_and_material --start_startx --do_predict_oop --load_base_solq --mess_up_from_loaded --log_freq 250 --val_freq 250 --set_name TIDEE_solq_oop
-```
+You can also reduce storage memory by turning off `--save_dissection_samples` and can save cpu/storage memory with `--reduced_eval_memory`
 
-To train the visual and language detector, you can run the following (see `models/aithor_bert_oop_visual.py` and `models/aithor_solq_base.py` for details): 
-```
-python main.py --mode visual_bert_oop --do_visual_and_language_oop --S 3 --data_batch_size 3 --run_val --load_val_agent --val_load_dir ./data/val_data/aithor_tidee_oop_VL --n_val 3 --load_train_agent --train_load_dir ./data/train_data/aithor_tidee_oop_VL --n_train 50 --randomize_scene_lighting_and_material --start_startx --do_predict_oop --mess_up_from_loaded  --save_freq 2500 --log_freq 250 --val_freq 250 --max_iters 25000 --keep_latest 5 --start_one --score_threshold_oop 0.0 --score_threshold_cat 0.0 --set_name TIDEE_oop_vis_lang
-```
-The above will generate training and validation data from the simulator if the data does not already exist. 
+## Evaluating on GQA
+
 
 # Citation
 If you like this paper, please cite us:
 ```
-@inproceedings{sarch2022tidee,
-            title = "TIDEE: Tidying Up Novel Rooms using Visuo-Semantic Common Sense Priors",
-            author = "Sarch, Gabriel and Fang, Zhaoyuan and Harley, Adam W. and Schydlo, Paul and Tarr, Michael J. and Gupta, Saurabh and Fragkiadaki, Katerina", 
-            booktitle = "European Conference on Computer Vision",
-            year = "2022"}
+@inproceedings{,
+            title = ,
+            author = , 
+            booktitle = ,
+            year = }
 ```
 

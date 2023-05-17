@@ -1,0 +1,17 @@
+ipdb
+imageio
+scipy
+pycocotools
+tqdm
+scikit-learn
+opencv-python
+setuptools
+wheel
+numpy
+cython
+pycortex
+wandb
+scikit-image
+statsmodels
+visualpriors
+timm

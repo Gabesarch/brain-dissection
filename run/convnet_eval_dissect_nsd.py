@@ -8,9 +8,9 @@ from tqdm import tqdm
 import pickle
 import os
 
-if args.mode=="convnet_nsd_eval_baudissect":
+if args.mode=="convnet_nsd_eval_dissect":
     from backend.dataloaders.nsd_image_loader import NSDDataloader
-elif args.mode=="convnet_places_eval_baudissect" or args.mode=="convnet_xtc_eval_baudissect": # or args.mode=="convnet_unitvisual":
+elif args.mode=="convnet_places_eval_dissect" or args.mode=="convnet_xtc_eval_dissect": # or args.mode=="convnet_unitvisual":
     from backend.dataloaders.places_image_loader import NSDDataloader
 else:
     assert(False) # wrong mode
@@ -50,8 +50,10 @@ import ipdb
 st = ipdb.set_trace
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+import sys
+sys.path.append('dissect')
 from dissect.netdissect import nethook, imgviz, show, segmenter, renormalize, upsample, tally, pbar, runningstats
-from dissect.netdissect import setting
+from dissect.experiment import setting
 
 torch.backends.cudnn.benchmark = True
 torch.set_grad_enabled(False) # not training anything!
@@ -133,7 +135,7 @@ class Eval():
         self.model.to(device)
         
         self.model.eval()
-        
+
         # (for debugging) if we want we can keep voxels above a correlation value or keep topk voxels by correlation with nsd test images
         if args.min_test_corr is not None or args.topk_units_from_corr is not None:
             if args.load_model:
