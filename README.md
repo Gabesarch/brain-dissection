@@ -29,7 +29,7 @@
 
 This repo contains code and data for running Brain Dissection. 
 
-This repo is heavily based on the methods from [High-level visual areas act like domain-general filters with strong selectivity and functional specialization](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html)
+This repo is heavily based on the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2)
 
 ### Contents
 <!--
@@ -45,9 +45,13 @@ with open("README.md", "r") as f:
 <ul>
 <li><a href="#installation"> Installation </a></li><ul>
 </ul>
+<li><a href="#Data"> Data</a></li><ul>
+</ul>
 <li><a href="#Response-Optimized-Training"> Response-Optimized Training</a><ul>
 </ul>
 <li><a href="#Model-Dissection"> Model Dissection</a></li><ul>
+</ul>
+<li><a href="#citation"> Citation </a></li><ul>
 </ul>
 </ul>
 </div>
@@ -59,41 +63,39 @@ with open("README.md", "r") as f:
 ```bash
 git clone https://github.com/Gabesarch/brain-dissection.git
 ```
-**(1a)** (optional) If you are using conda, create an environment: 
+
+**(2)** Clone dependency repos and download checkpoints. Run:
+```bash
+sh setup.sh
+```
+
+**(3)** (optional) If you are using conda, create an environment: 
 ```bash
 conda create -n brain_dissect python=3.8
 ```
 
-**(2)** Install [PyTorch](https://pytorch.org/get-started/locally/) with the CUDA version you have. For example, run the following for CUDA 11.1: 
+**(4)** Install [PyTorch](https://pytorch.org/get-started/locally/) with the CUDA version you have. For example, run the following for CUDA 11.1: 
 ```bash
 pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
-**(3)** Install additional requirements: 
+**(5)** Install additional requirements: 
 ```bash
 pip install -r requirements.txt
 ```
 
-**(4)** Install [PyG](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html) with correct PyTorch and CUDA version. 
-For example, run the following for PyTorch 1.8.1 & CUDA 11.1:
-```bash
-pip install torch-scatter     -f https://pytorch-geometric.com/whl/torch-1.8.1+cu111.html
-pip install torch-sparse==0.6.12      -f https://pytorch-geometric.com/whl/torch-1.8.1+cu111.html
-pip install torch-cluster     -f https://pytorch-geometric.com/whl/torch-1.8.1+cu111.html
-pip install torch-spline-conv -f https://pytorch-geometric.com/whl/torch-1.8.1+cu111.html
-pip install torch-geometric 
-```
+# Data
 
-**(5)** Install [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) (needed for SOLQ detector) with correct PyTorch and CUDA version. 
-E.g. for PyTorch 1.8 & CUDA 11.1:
-```bash
-python -m pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu111/torch1.8/index.html
-```
+## Natural Scenes Dataset
+Please download and process the Natural Scenes Dataset to get the fMRI data and NSD images: [Link](https://naturalscenesdataset.org/)
 
-**(6)** Build SOLQ deformable attention:
-```bash
-cd ./SOLQ/models/ops && sh make.sh && cd ../../..
-```
+## PLACES365
+For evaluation of the Places365 dataset, please download the Places365 dataset : [Link](http://places2.csail.mit.edu/)
+Put the dataset in ./datasets
+
+## GQA dataset
+For evaluation of the GQA dataset, please download the GQA dataset : [Link](https://cs.stanford.edu/people/dorarad/gqa/download.html)
+Put the dataset in ./datasets
 
 # Response-Optimized Training
 

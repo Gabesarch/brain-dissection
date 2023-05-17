@@ -125,7 +125,7 @@ parser.add_argument("--use_spatial_mask", action="store_true", default=False, he
 
 parser.add_argument("--reduced_eval_memory", action="store_true", default=False, help="use spatial mask in eval?")
 
-parser.add_argument("--xtc_checkpoint_paths", type=str, default='./gqa', help="Path to wandb metadata")
+parser.add_argument("--xtc_checkpoint_paths", type=str, default='./checkpoints', help="Path to wandb metadata")
 parser.add_argument("--mode2", default=None, type=str, help="mode to run, see main.py")
 
 parser.add_argument("--tmp_dir_load", default=None, type=str, help="mode to run, see main.py")
