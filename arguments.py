@@ -15,14 +15,19 @@ parser.add_argument("--split", type=str, default="val", help="dataloader split")
 parser.add_argument("--pretraining", type=str, default="dino", help="which pretraining to load weights from?")
 parser.add_argument("--distributed", action="store_true", default=False, help="distributed training")
 parser.add_argument('--lr', default=2e-5, type=float) 
-parser.add_argument('--clip_max_norm', default=1.0, type=float,
+parser.add_argument('--clip_max_norm', default=0.1, type=float,
                     help='gradient clipping max norm')
 
-parser.add_argument('--weight_decay', default=1e-4, type=float)
-parser.add_argument('--epochs', default=50, type=int)
+parser.add_argument('--weight_decay', default=1e-2, type=float)
+parser.add_argument('--epochs', default=100, type=int)
 parser.add_argument('--lr_drop', default=4000, type=int)
 parser.add_argument('--readout_sparse_weight', default=0.02, type=float)
 parser.add_argument("--sparsity_on_feature_weights", action="store_true", default=False, help="put sparsity of feature weights for what/where")
+parser.add_argument("--val_freq", type=int, default=2500, help="how often to run validation")
+parser.add_argument("--arch", type=str, default="cnn_alt", help="which arch to use for training?")
+parser.add_argument("--patience", type=int, default=19, help="patience for early stopping")
+parser.add_argument("--early_stopping", type=int, default=10, help="Stop training if correlation has not improved upon best in X epochs. Patience must also be defined.")
+
 
 parser.add_argument('--total_voxel_size', default=None, type=int)
 
@@ -33,12 +38,12 @@ parser.add_argument("--load_strict_false", action="store_true", default=False, h
 parser.add_argument("--lr_scheduler_from_scratch", action="store_true", default=False, help="do not load LR scheduler from checkpoint if True")
 parser.add_argument("--optimizer_from_scratch", action="store_true", default=False, help="do not load optimizer from checkpoint if True")
 parser.add_argument("--start_one", action="store_true", default=False, help="start from iteration 0")
-parser.add_argument('--batch_size', default=32, type=int, help="batch size for model training")
+parser.add_argument('--batch_size', default=24, type=int, help="batch size for model training")
 parser.add_argument('--num_workers', default=4, type=int)
 parser.add_argument('--save_freq_epoch', default=5, type=int, help="How often every X epochs to save model")
 parser.add_argument('--keep_latest', default=10, type=int, help="number of checkpoints to keep at one time")
 parser.add_argument('--max_validation_iters', default=None, type=int, help="maximum validation iters")
-parser.add_argument("--checkpoint_path", type=str, default="", help="Path for saving checkpoints")
+parser.add_argument("--checkpoint_path", type=str, default="./checkpoints", help="Path for saving checkpoints")
 parser.add_argument("--attention_threshold", type=float, default=None, help="""We visualize masks
     obtained by thresholding the self-attention maps to keep xx% of the mass.""")
 parser.add_argument("--images_path", type=str, default="./data/images", help="Path for saving checkpoints")
@@ -47,15 +52,13 @@ parser.add_argument("--activation_threshold", type=float, default=0.97, help="""
     by thresholding the activation maps""")
 
 # parser.add_argument('--patch_size', default=16, type=int, help="patch size for vit in pixels")
-parser.add_argument("--arch", type=str, default="cnn_alt", help="which arch to use for training?")
 
 parser.add_argument("--log_freq", type=int, default=250, help="how often to log to tensorboard in iterations")
-parser.add_argument("--lr_scheduler_freq", type=int, default=500, help="how often to step LR scheduler in iterations")
+# parser.add_argument("--lr_scheduler_freq", type=int, default=500, help="how often to step LR scheduler in iterations")
 parser.add_argument("--run_validation", action="store_true", default=False, help="run validation every val_freq iters")
-parser.add_argument("--val_freq", type=int, default=0, help="how often to run validation")
 parser.add_argument("--save_freq", type=int, default=500, help="how often to save a checkpoint")
 
-parser.add_argument("--image_size", type=int, default=480, help="")
+parser.add_argument("--image_size", type=int, default=224, help="")
 parser.add_argument("--image_size_eval", type=int, default=256, help="")
 
 parser.add_argument('--readout_sparse_weight_spatial', default=0.0, type=float)
@@ -82,7 +85,7 @@ parser.add_argument("--subsample_activations", type=int, default=None, help="sub
 
 parser.add_argument("--default_args", type=str, default=None, help="set default args")
 
-parser.add_argument("--subjects", type=int, nargs='+', default=[1], help="which subjects to use?")
+parser.add_argument("--subjects", type=int, nargs='+', default=[1,2,3,4,5,6,7,8], help="which subjects to use?")
 
 parser.add_argument("--topk", type=int, default=100, help="")
 
@@ -109,14 +112,12 @@ parser.add_argument("--images_path_alt", type=str, default=None, help="Path to a
 parser.add_argument("--save_dissection_samples", action="store_true", default=False, help="save dissection data?")
 parser.add_argument("--load_dissection_samples", action="store_true", default=False, help="save dissection data?")
 
-parser.add_argument("--patience", type=int, default=None, help="patience for early stopping")
 
 parser.add_argument("--filter_images_by_responses", action="store_true", default=False, help="filter images by top preicted responses for each ROI?")
 parser.add_argument("--topk_filter", type=int, default=1000, help="topk to keep for filter_images_by_responses")
 
 parser.add_argument("--wandb_directory", type=str, default='./wandb', help="Path to wandb metadata")
 
-parser.add_argument("--early_stopping", type=int, default=None, help="Stop training if correlation has not improved upon best in X epochs. Patience must also be defined.")
 
 parser.add_argument("--gqa_path", type=str, default='./gqa', help="Path to wandb metadata")
 parser.add_argument("--shared_depth_maps", action="store_true", default=False, help="shared depth maps across subjects?")
