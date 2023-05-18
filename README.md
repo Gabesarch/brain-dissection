@@ -7,7 +7,7 @@
         <!-- ai2thor-rearrangement wasn't identifiable by GitHub (on the day this was added), so using the same one as ai2thor -->
 <!--         <img alt="License" src="https://img.shields.io/github/license/allenai/ai2thor.svg?color=blue">
     </a> -->
-    <a href="" target="_blank">
+    <a href="https://brain-dissection.github.io/" target="_blank">
         <img alt="Website" src="https://img.shields.io/badge/website-BrainDissection-orange">
     </a>
 <!--     <a href="//github.com/allenai/ai2thor-rearrangement/releases">
@@ -146,10 +146,10 @@ You can also reduce storage memory by turning off `--save_dissection_samples` an
 # Citation
 If you like this paper, please cite us:
 ```
-@inproceedings{,
-            title = ,
-            author = , 
-            booktitle = ,
-            year = }
+@inproceedings{sarch2023braindissect,
+            title = "Brain Dissection: fMRI-trained Networks Reveal Spatial Selectivity in the Processing of Natural Images",
+            author = "Sarch, Gabriel H. and Tarr, Michael J. and Wehbe, Leila and Fragkiadaki, Katerina", 
+            booktitle = "bioRxiv",
+            year = "2023"}
 ```
 
