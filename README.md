@@ -29,11 +29,7 @@
 
 This repo contains code and data for running Brain Dissection. 
 
-<<<<<<< HEAD
-This repo is based on the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2)
-=======
 This repo is heavily inspired by the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2).
->>>>>>> 8615053be45b58834357ef482cb0c6d3fb01d6a2
 
 ### Contents
 <!--
