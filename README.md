@@ -29,7 +29,7 @@
 
 This repo contains code and data for running Brain Dissection. 
 
-This repo is heavily based on the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2)
+This repo is based on the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2)
 
 ### Contents
 <!--
@@ -99,12 +99,14 @@ Put the dataset in `./datasets`
 ## GQA dataset
 For evaluation of the GQA dataset, please download the GQA dataset : [Link](https://cs.stanford.edu/people/dorarad/gqa/download.html)
 
+Then, to get segmentation masks for the dataset from Segment Anything, please run `__main__` in `backend/dataloaders/gqa_loader.py`, setting appropriate paths in the arguments. 
+
 Put the dataset in `./datasets`
 
 # Response-Optimized Training
 
 ## Training on NSD
-Train a network to predict the responses of NSD. You can see `nets/convnet_alt.py` for the model file and `models/convnet_fit_nsd.py` for the model training code. To train on a model on the NSD data using default hyperparameters (see `arguments.py`), run the following (for example ROI RSC):
+Train a network to predict the responses of NSD. You can see `nets/convnet_alt.py` for the model file and `run/convnet_fit_nsd.py` for the model training code. To train on a model on the NSD data using default hyperparameters (see `arguments.py`), run the following (for example ROI RSC):
 ```
 python main.py \
     --rois RSC \
@@ -122,26 +124,50 @@ python main.py \
 This section details run the network dissection on the response-optimized network.
 
 ## Evaluating on Places365
-To evaluate on Places365 for depth, surface normals, shading, guassian curvature, and category, run the following (for example on Subject 1 for model trained from the section above):
+To evaluate on Places365 for depth, surface normals, shading, guassian curvature, and category, run the following (for example on Subject 1 for RSC model trained from the section above):
 ```
 python main.py \
     --mode convnet_xtc_eval_baudissect \
     --data_directory REPLACE_WITH_PLACES365_IMAGE_DIRECTORY \
     --load_model \
-    --load_model_path "./checkpoints/train_subjs12345678_RSC/model-best.pth" \
+    --load_model_path ./checkpoints/train_subjs12345678_RSC/model-best.pth \
+    --tmp_dir ./tmp/cache_places \
     --eval_subject 1 \
     --analyze_depth \
     --save_dissection_samples \
     --load_dissection_samples \
     --filter_images_by_responses \
     --batch_size 1 \
-    --set_name "EVAL_places365_subject1_RSC" 
+    --set_name EVAL_places365_subject1_RSC
 ```
 
 You can also reduce storage memory by turning off `--save_dissection_samples` and can save cpu/storage memory with `--reduced_eval_memory`
 
+See `run/convnet_eval_dissect_nsd.py` and `run/convnet_eval_dissect_xtc.py` for more information (`convnet_eval_dissect_xtc` inherits from `convnet_eval_dissect_nsd`).
+
 ## Evaluating on GQA
 
+To evaluate on GQA for object category, relations, and relations, run the following (for example on Subject 1 for RSC model trained from the section above):
+```
+python main.py \
+    --mode convnet_gqa_eval_baudissect \
+    --gqa_path REPLACE_WITH_GQA_IMAGE_DIRECTORY \
+    --load_model \
+    --load_model_path ./checkpoints/train_subjs12345678_RSC/model-best.pth \
+    --tmp_dir ./tmp/cache_gqa \
+    --split both \
+    --eval_subject 1 \
+    --save_dissection_samples \
+    --load_dissection_samples \
+    --filter_images_by_responses \
+    --topk_filter 5000 \
+    --batch_size 1 \
+    --set_name EVAL_places365_subject1_RSC
+```
+
+You can also reduce storage memory by turning off `--save_dissection_samples` and can save cpu/storage memory with `--reduced_eval_memory`. 
+
+See `run/convnet_eval_dissect_gqa.py` for more information.
 
 # Citation
 If you like this paper, please cite us:
