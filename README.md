@@ -7,7 +7,7 @@
         <!-- ai2thor-rearrangement wasn't identifiable by GitHub (on the day this was added), so using the same one as ai2thor -->
 <!--         <img alt="License" src="https://img.shields.io/github/license/allenai/ai2thor.svg?color=blue">
     </a> -->
-    <a href="" target="_blank">
+    <a href="https://brain-dissection.github.io/" target="_blank">
         <img alt="Website" src="https://img.shields.io/badge/website-BrainDissection-orange">
     </a>
 <!--     <a href="//github.com/allenai/ai2thor-rearrangement/releases">
@@ -29,7 +29,11 @@
 
 This repo contains code and data for running Brain Dissection. 
 
+<<<<<<< HEAD
 This repo is based on the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2)
+=======
+This repo is heavily inspired by the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2).
+>>>>>>> 8615053be45b58834357ef482cb0c6d3fb01d6a2
 
 ### Contents
 <!--
@@ -172,10 +176,10 @@ See `run/convnet_eval_dissect_gqa.py` for more information.
 # Citation
 If you like this paper, please cite us:
 ```
-@inproceedings{,
-            title = ,
-            author = , 
-            booktitle = ,
-            year = }
+@inproceedings{sarch2023braindissect,
+            title = "Brain Dissection: fMRI-trained Networks Reveal Spatial Selectivity in the Processing of Natural Images",
+            author = "Sarch, Gabriel H. and Tarr, Michael J. and Wehbe, Leila and Fragkiadaki, Katerina", 
+            booktitle = "bioRxiv",
+            year = "2023"}
 ```
 
