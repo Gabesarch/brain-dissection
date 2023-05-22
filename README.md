@@ -2,6 +2,15 @@
     Brain Dissection: fMRI-trained Networks Reveal Spatial Selectivity in the Processing of Natural Images
 </h1>
 
+<p align="left">
+    <a href="https://brain-dissection.github.io/" target="_blank">
+        <img alt="Website" src="https://img.shields.io/badge/website-BrainDissection-orange">
+    </a>
+    <a href="" target="_blank">
+        <img src="https://img.shields.io/badge/arXiv-2103.16544-<COLOR>">
+    </a>
+</p>
+
 This repo contains code and data for running Brain Dissection. 
 
 This repo builds on the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2).
