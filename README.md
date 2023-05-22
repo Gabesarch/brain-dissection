@@ -153,3 +153,13 @@ You can also reduce storage memory by turning off `--save_dissection_samples` an
 
 See `run/convnet_eval_dissect_gqa.py` for more information.
 
+# Citation
+If you like this paper, please cite us:
+```
+@inproceedings{sarch2023braindissect,
+            title = "Brain Dissection: fMRI-trained Networks Reveal Spatial Selectivity in the Processing of Natural Images",
+            author = "Sarch, Gabriel H. and Tarr, Michael J. and Wehbe, Leila and Fragkiadaki, Katerina", 
+            booktitle = "bioRxiv",
+            year = "2023"}
+```
+
