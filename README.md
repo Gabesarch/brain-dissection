@@ -7,7 +7,7 @@
         <img alt="Website" src="https://img.shields.io/badge/website-BrainDissection-orange">
     </a>
     <a href="" target="_blank">
-        <img src="https://img.shields.io/badge/arXiv-2103.16544-<COLOR>">
+        <img src="https://img.shields.io/badge/bioRxiv-<COLOR>">
     </a>
 </p>
 
