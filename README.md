@@ -111,7 +111,7 @@ This section details run the network dissection on the response-optimized networ
 To evaluate on Places365 for depth, surface normals, shading, guassian curvature, and category, run the following (for example on Subject 1 for RSC model trained from the section above):
 ```
 python main.py \
-    --mode convnet_xtc_eval_baudissect \
+    --mode convnet_xtc_eval_dissect \
     --data_directory REPLACE_WITH_PLACES365_IMAGE_DIRECTORY \
     --load_model \
     --load_model_path ./checkpoints/train_subjs12345678_RSC/model-best.pth \
@@ -134,7 +134,7 @@ See `run/convnet_eval_dissect_nsd.py` and `run/convnet_eval_dissect_xtc.py` for 
 To evaluate on GQA for object category, relations, and relations, run the following (for example on Subject 1 for RSC model trained from the section above):
 ```
 python main.py \
-    --mode convnet_gqa_eval_baudissect \
+    --mode convnet_gqa_eval_dissect \
     --gqa_path REPLACE_WITH_GQA_IMAGE_DIRECTORY \
     --load_model \
     --load_model_path ./checkpoints/train_subjs12345678_RSC/model-best.pth \
