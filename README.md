@@ -3,37 +3,17 @@
 </h1>
 
 <p align="left">
-<!--     <a href="//github.com/allenai/ai2thor-rearrangement/blob/main/LICENSE">
-        <!-- ai2thor-rearrangement wasn't identifiable by GitHub (on the day this was added), so using the same one as ai2thor -->
-<!--         <img alt="License" src="https://img.shields.io/github/license/allenai/ai2thor.svg?color=blue">
-    </a> -->
     <a href="https://brain-dissection.github.io/" target="_blank">
         <img alt="Website" src="https://img.shields.io/badge/website-BrainDissection-orange">
     </a>
-<!--     <a href="//github.com/allenai/ai2thor-rearrangement/releases">
-        <img alt="GitHub release" src="https://img.shields.io/github/release/allenai/ai2thor-rearrangement.svg">
-    </a> -->
     <a href="" target="_blank">
-        <img src="https://img.shields.io/badge/arXiv-2103.16544-<COLOR>">
+        <img src="https://img.shields.io/badge/bioRxiv-542635-<COLOR>">
     </a>
-<!--     <a href="//arxiv.org/abs/2103.16544" target="_blank">
-        <img src="https://img.shields.io/badge/venue-CVPR 2021-blue">
-    </a> -->
-    <a href="" target="_blank">
-        <img src="https://img.shields.io/badge/video-YouTube-red">
-    </a>
-<!--     <a href="https://join.slack.com/t/ask-prior/shared_invite/zt-oq4z9u4i-QR3kgpeeTAymEDkNpZmCcg" target="_blank">
-        <img src="https://img.shields.io/badge/questions-Ask PRIOR Slack-blue">
-    </a> -->
 </p>
 
 This repo contains code and data for running Brain Dissection. 
 
-<<<<<<< HEAD
-This repo is based on the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2)
-=======
-This repo is heavily inspired by the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2).
->>>>>>> 8615053be45b58834357ef482cb0c6d3fb01d6a2
+This repo builds on the methods from [Higher visual areas act like domain-general filters with strong selectivity and functional specialization](https://www.biorxiv.org/content/10.1101/2022.03.16.484578v2).
 
 ### Contents
 <!--
@@ -131,7 +111,7 @@ This section details run the network dissection on the response-optimized networ
 To evaluate on Places365 for depth, surface normals, shading, guassian curvature, and category, run the following (for example on Subject 1 for RSC model trained from the section above):
 ```
 python main.py \
-    --mode convnet_xtc_eval_baudissect \
+    --mode convnet_xtc_eval_dissect \
     --data_directory REPLACE_WITH_PLACES365_IMAGE_DIRECTORY \
     --load_model \
     --load_model_path ./checkpoints/train_subjs12345678_RSC/model-best.pth \
@@ -154,7 +134,7 @@ See `run/convnet_eval_dissect_nsd.py` and `run/convnet_eval_dissect_xtc.py` for 
 To evaluate on GQA for object category, relations, and relations, run the following (for example on Subject 1 for RSC model trained from the section above):
 ```
 python main.py \
-    --mode convnet_gqa_eval_baudissect \
+    --mode convnet_gqa_eval_dissect \
     --gqa_path REPLACE_WITH_GQA_IMAGE_DIRECTORY \
     --load_model \
     --load_model_path ./checkpoints/train_subjs12345678_RSC/model-best.pth \
@@ -178,7 +158,7 @@ If you like this paper, please cite us:
 ```
 @inproceedings{sarch2023braindissect,
             title = "Brain Dissection: fMRI-trained Networks Reveal Spatial Selectivity in the Processing of Natural Images",
-            author = "Sarch, Gabriel H. and Tarr, Michael J. and Wehbe, Leila and Fragkiadaki, Katerina", 
+            author = "Sarch, Gabriel H. and Tarr, Michael J. and Fragkiadaki, Katerina and Wehbe, Leila", 
             booktitle = "bioRxiv",
             year = "2023"}
 ```
