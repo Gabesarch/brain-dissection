@@ -19,6 +19,8 @@ class OptRespLoss(nn.Module):
         loss = self.criterion(masked_features, masked_y)
 
         if compute_corr:
+            if len(masked_features)==0:
+                return loss, torch.tensor(0).to(masked_features.device)
             corr, _ = pearsonr(masked_features.detach().cpu().numpy(), masked_y.detach().cpu().numpy())
             corr = torch.tensor(corr).to(masked_features.device)
             return loss, corr

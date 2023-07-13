@@ -29,7 +29,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 torch.manual_seed(args.seed)
 np.random.seed(args.seed)
 random.seed(args.seed)
-torch.backends.cudnn.benchmark = True
+torch.backends.cudnn.benchmark = False
 
 class NSD_OPT():
     def __init__(self):  
