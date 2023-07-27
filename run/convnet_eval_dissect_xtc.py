@@ -81,6 +81,8 @@ class Eval_XTC(Eval):
         model_state_dict = torch.load(reshading_path, map_location=map_location)
         self.reshading_model.load_state_dict(model_state_dict)
         self.reshading_model.to(device).eval()
+
+        self.plot_for_figure = args.plot_for_figure
     
     @torch.no_grad()
     def run_dissection(self):
