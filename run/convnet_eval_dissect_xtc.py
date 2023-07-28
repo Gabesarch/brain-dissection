@@ -394,7 +394,7 @@ class Eval_XTC(Eval):
                 dat["segcatlabels"] = segcatlabels
                 np.savez(cachefile, **dat)
 
-        self.run_analysis_xtc(acts, responses, images_vis, segs, iv, seglabels, segcatlabels, cq, normals=normals, reshadings=reshadings, principal_curvatures=principal_curvatures, rois=self.rois)
+        self.run_analysis_xtc(acts, responses, images_vis, segs, iv, seglabels, segcatlabels, cq, normals=normals, reshadings=reshadings, principal_curvatures=principal_curvatures, depths=depths, rois=self.rois)
 
     def run_analysis_xtc(self, acts, responses, images_vis, segs, iv, seglabels, segcatlabels, cq, normals=None, reshadings=None, principal_curvatures=None, depths=None, rois=None, run_original_analysis=True):
         
