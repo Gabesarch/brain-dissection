@@ -319,6 +319,15 @@ def get_roi_config():
         5: "aTL-faces",
     }
 
+    bodies_roi_names = {
+        -1: "non_cortical",
+        0: "cortical",
+        1: "EBA",
+        2: "FBA-1",
+        3: "FBA-2",
+        4: "mTL-bodies",
+    }
+
     word_roi_names = {
         -1: "non_cortical",
         0: "cortical",
@@ -467,6 +476,7 @@ def get_roi_config():
         "floc-places": place_roi_names,
         "prf-visualrois": visual_roi_names,
         "prf-eccrois": ecc_roi_names,
+        "floc-bodies": bodies_roi_names,
         "Kastner2015": Kastner2015_roi_names,
         "HCP_MMP1": HCP_MMP1_roi_names
     }
