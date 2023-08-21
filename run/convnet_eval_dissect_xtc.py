@@ -81,6 +81,8 @@ class Eval_XTC(Eval):
         model_state_dict = torch.load(reshading_path, map_location=map_location)
         self.reshading_model.load_state_dict(model_state_dict)
         self.reshading_model.to(device).eval()
+
+        self.plot_for_figure = args.plot_for_figure
     
     @torch.no_grad()
     def run_dissection(self):
@@ -134,7 +136,7 @@ class Eval_XTC(Eval):
                     normals = torch.from_numpy(np.load(os.path.join(args.tmp_dir, 'dissect', root_model, f"{model_name.split('.pth')[0]}_{args.mode2 if args.mode2 is not None else args.mode}_dissection_normals{subj_add}.npy")))
                     reshadings = torch.from_numpy(np.load(os.path.join(args.tmp_dir, 'dissect', root_model, f"{model_name.split('.pth')[0]}_{args.mode2 if args.mode2 is not None else args.mode}_dissection_reshadings{subj_add}.npy")))
                     principal_curvatures = torch.from_numpy(np.load(os.path.join(args.tmp_dir, 'dissect', root_model, f"{model_name.split('.pth')[0]}_{args.mode2 if args.mode2 is not None else args.mode}_dissection_principal_curvatures{subj_add}.npy")))
-                    self.run_analysis(acts, responses, images_vis, segs, iv, seglabels, segcatlabels, cq, normals=normals, reshadings=reshadings, principal_curvatures=principal_curvatures, rois=self.rois)
+                    self.run_analysis_xtc(acts, responses, images_vis, segs, iv, seglabels, segcatlabels, cq, normals=normals, reshadings=reshadings, principal_curvatures=principal_curvatures, depths=depths, rois=self.rois)
                     return
                 else:
                     loaded=True
@@ -392,7 +394,7 @@ class Eval_XTC(Eval):
                 dat["segcatlabels"] = segcatlabels
                 np.savez(cachefile, **dat)
 
-        self.run_analysis(acts, responses, images_vis, segs, iv, seglabels, segcatlabels, cq, normals=normals, reshadings=reshadings, principal_curvatures=principal_curvatures, rois=self.rois)
+        self.run_analysis_xtc(acts, responses, images_vis, segs, iv, seglabels, segcatlabels, cq, normals=normals, reshadings=reshadings, principal_curvatures=principal_curvatures, depths=depths, rois=self.rois)
 
     def run_analysis_xtc(self, acts, responses, images_vis, segs, iv, seglabels, segcatlabels, cq, normals=None, reshadings=None, principal_curvatures=None, depths=None, rois=None, run_original_analysis=True):
         
