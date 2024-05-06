@@ -73,6 +73,8 @@ pip install -r requirements.txt
 ## Natural Scenes Dataset
 Please download and process the Natural Scenes Dataset to get the fMRI data and NSD images: [Link](https://naturalscenesdataset.org/)
 
+To pre-process the data for training, please see `process_nsd.sh`. This will generate the averaged and z-scored cortical brain data, subject coco id repeats, and 1d cortical masks for ROIs.
+
 ## PLACES365
 Our dataloaders will download the places dataset for you when first running the evaluation.
 
